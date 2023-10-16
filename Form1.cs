@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace exPort
 {
     public partial class Form1 : Form
@@ -67,6 +69,18 @@ namespace exPort
 
         private void open_button_Click(object sender, EventArgs e)
         {
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = "Open file";
+                openFileDialog.Filter = "Text documents (*.txt)|*.txt|C# source code (*.cs)|*.cs|C++ source code (*.cpp)|*.cpp|C source code (*.c)|*.c" +
+                    "|Java source code (*.java)|*.java|Javascript file (*.js)|*.js|Python source code (*.py)|*.py|HTML file (*.html)|*.html|CSS file (*.css)|*.css" +
+                    "|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var readText = File.ReadAllText(openFileDialog.FileName);
+                    textArea.Text = readText;
+                }
+            }
         }
     }
 }
