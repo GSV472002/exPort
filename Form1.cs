@@ -79,8 +79,27 @@ namespace exPort
                 {
                     var readText = File.ReadAllText(openFileDialog.FileName);
                     textArea.Text = readText;
+                    this.Text = openFileDialog.FileName + " | exPort V1.0";
                 }
             }
+        }
+
+        private void newFile_button_Click(object sender, EventArgs e)
+        {
+            if (textArea.Text.Length > 0)
+            {
+                var result = MessageBox.Show("Are you sure you want to start a new file?", "exPort V1.0", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    textArea.Clear();
+                    this.Text = "exPort V1.0";
+                }
+            }
+        }
+
+        private void textArea_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
